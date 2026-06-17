@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SONNEY Paris, About, Spec Sample by The Silk Pen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /*
+      SONNEY DESIGN LOGIC
+
+      Lora's visual world: trompe-l'oeil animal prints from garden hoses,
+      Jura forest light, rubber-as-leather, nature-as-material-innovation.
+      The palette should feel like that garden after rain. Not dark luxury.
+      Not the blinding white of a typical Shopify fashion store. Something
+      in between. Organic. Slightly mineral. Alive.
+
+      PALETTE
+      --mousse:   #1d1f1a   Wet moss at night. The deepest anchor.
+      --terre:    #2c2e28   Forest earth. Body text anchor.
+      --ecorce:   #6b6b5c   Bark. Secondary text.
+      --brume:    #f4f1ea   Morning mist. Page background.
+      --lin:      #e2ddd3   Linen. Borders and dividers.
+      --jade:     #8a9e7e   Garden green. The one accent that earns its place.
+      --pluie:    #f9f7f2   Rain-washed white.
+
+      TYPE
+      --display: Cormorant Garamond (sensory, literary, feels handmade)
+      --body:    DM Sans (clean counterpoint, internationalist)
+
+      SIGNATURE ELEMENT
+      The "material reveal", a full-width band of dark texture between
+      sections that functions like a piece of Lora's fabric laid across
+      the page. Text drops into it then back out into the light.
+    */
+
+    :root {
+      --mousse:  #1d1f1a;
+      --terre:   #2c2e28;
+      --ecorce:  #6b6b5c;
+      --brume:   #f4f1ea;
+      --lin:     #e2ddd3;
+      --jade:    #8a9e7e;
+      --pluie:   #f9f7f2;
+
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'DM Sans', system-ui, sans-serif;
+
+      --max: 820px;
+      --pad: clamp(1.5rem, 6vw, 4rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+
+    body {
+      background: var(--brume);
+      color: var(--terre);
+      font-family: var(--body);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem var(--pad);
+      background: var(--brume);
+      border-bottom: 1px solid var(--lin);
+    }
+
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mousse);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ecorce);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--mousse); }
+
+    /* NAV TOGGLE (hamburger), hidden until the inline links run out of room */
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 22px;
+      height: 16px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .nav-toggle span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--mousse);
+      transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+    }
+
+    .nav-toggle span:nth-child(1) { top: 0; }
+    .nav-toggle span:nth-child(2) { top: 50%; }
+    .nav-toggle span:nth-child(3) { top: 100%; }
+
+    nav.nav-open .nav-toggle span:nth-child(1) { top: 50%; transform: rotate(45deg); }
+    nav.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    nav.nav-open .nav-toggle span:nth-child(3) { top: 50%; transform: rotate(-45deg); }
+
+    /* HERO */
+    .hero {
+      padding: 6rem var(--pad) 0;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--jade);
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(3rem, 9vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--mousse);
+      margin-bottom: 3rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--jade);
+    }
+
+    .hero-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--lin);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-intro {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--ecorce);
+      max-width: min(520px, 100%);
+      margin-bottom: 5rem;
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem var(--pad);
+      border-top: 1px solid var(--lin);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1.5rem 4rem;
+      align-items: start;
+    }
+
+    .col-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ecorce);
+      padding-top: 0.4rem;
+      line-height: 1.6;
+    }
+
+    .heading-2 {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--mousse);
+      margin-bottom: 2rem;
+    }
+
+    .heading-2 em { font-style: italic; }
+
+    .body-text {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: #3a3c35;
+      margin-bottom: 1.4rem;
+    }
+
+    .body-text:last-child { margin-bottom: 0; }
+
+    /* PULL QUOTE */
+    .pull-quote {
+      margin: 3.5rem 0;
+      padding-left: 2rem;
+      border-left: 2px solid var(--jade);
+    }
+
+    .pq-text {
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 3.8vw, 2.2rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--mousse);
+      margin-bottom: 0.8rem;
+    }
+
+    .pq-cite {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ecorce);
+    }
+
+    /* MATERIAL BAND, the signature element */
+    .material-band {
+      background: var(--mousse);
+      padding: 5rem var(--pad);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .material-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 10% 50%, rgba(138,158,126,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 80% at 90% 30%, rgba(138,158,126,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .band-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .band-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--jade);
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    .band-heading {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--brume);
+      margin-bottom: 2.5rem;
+    }
+
+    .band-heading em {
+      font-style: italic;
+      color: rgba(138,158,126,0.85);
+    }
+
+    .band-body {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: rgba(244,241,234,0.55);
+      margin-bottom: 1.3rem;
+      max-width: min(560px, 100%);
+    }
+
+    .band-body:last-child { margin-bottom: 0; }
+
+    /* CREDENTIALS GRID */
+    .cred-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--lin);
+      border: 1px solid var(--lin);
+      margin-top: 3rem;
+    }
+
+    .cred-cell {
+      background: var(--brume);
+      padding: 2rem 1.8rem;
+    }
+
+    .cred-marker {
+      font-family: var(--display);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--jade);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .cred-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mousse);
+      margin-bottom: 0.3rem;
+    }
+
+    .cred-body {
+      font-size: 0.87rem;
+      line-height: 1.7;
+      color: var(--ecorce);
+    }
+
+    /* PROCESS STRIP */
+    .process {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+    }
+
+    .process-item {
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 0 1.8rem;
+      padding: 1.7rem 0;
+      border-bottom: 1px solid var(--lin);
+      align-items: start;
+    }
+
+    .process-item:first-child { border-top: 1px solid var(--lin); }
+
+    .process-num {
+      font-family: var(--display);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--jade);
+      padding-top: 0.15rem;
+    }
+
+    .process-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mousse);
+      margin-bottom: 0.35rem;
+    }
+
+    .process-body {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--ecorce);
+    }
+
+    /* CLOSING */
+    .closing {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem var(--pad) 7rem;
+    }
+
+    .closing-heading {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.15;
+      color: var(--mousse);
+      margin-bottom: 2rem;
+      max-width: min(600px, 100%);
+    }
+
+    .closing-body {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: var(--ecorce);
+      max-width: min(480px, 100%);
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.6rem;
+      border: 1px solid var(--mousse);
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--mousse);
+      text-decoration: none;
+      transition: background 0.22s, color 0.22s;
+    }
+
+    .btn:hover {
+      background: var(--mousse);
+      color: var(--brume);
+    }
+
+    /* CREDIT */
+    .credit {
+      border-top: 1px solid var(--lin);
+      padding: 1.4rem var(--pad);
+      text-align: center;
+    }
+
+    .credit p {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ecorce);
+    }
+
+    .credit a { color: var(--jade); text-decoration: none; }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.72s ease, transform 0.72s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* MOBILE NAV, switches to a hamburger before the inline links run out of room */
+    @media (max-width: 700px) {
+      .nav-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--brume);
+        border-bottom: 1px solid var(--lin);
+        padding: 0.25rem var(--pad) 1.25rem;
+      }
+
+      nav.nav-open .nav-links { display: flex; }
+
+      .nav-links li { width: 100%; }
+
+      .nav-links a {
+        display: block;
+        padding: 1rem 0;
+        border-top: 1px solid var(--lin);
+        font-size: 0.7rem;
+      }
+    }
+
+    /* ── 580px — mobile ── */
+    @media (max-width: 580px) {
+      /* Hero */
+      .hero { padding: 3.5rem var(--pad) 0; }
+      .hero-headline { margin-bottom: 2rem; }
+      .hero-intro { font-size: 1rem; margin-bottom: 3.5rem; }
+
+      /* Sections */
+      .section { padding: 3rem var(--pad); }
+
+      /* Two-col */
+      .two-col { grid-template-columns: 1fr; gap: 0.4rem; }
+      .col-label { padding-top: 0; margin-bottom: 0.2rem; }
+
+      /* Pull quote */
+      .pull-quote { margin: 2rem 0; padding-left: 1.3rem; }
+
+      /* Material band */
+      .material-band { padding: 3.5rem var(--pad); }
+      .band-heading { margin-bottom: 1.8rem; }
+
+      /* Credentials */
+      .cred-grid { grid-template-columns: 1fr; margin-top: 2rem; }
+      .cred-cell { padding: 1.5rem 1.2rem; }
+
+      /* Process */
+      .process { margin-top: 1.8rem; }
+      .process-item { gap: 0 1.2rem; padding: 1.4rem 0; }
+
+      /* Closing */
+      .closing { padding: 3.5rem var(--pad) 4rem; }
+
+      /* Credit */
+      .credit p {
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        line-height: 2;
+      }
+    }
+
+    /* ── 420px — small phones ── */
+    @media (max-width: 420px) {
+      /* Hero */
+      .hero { padding: 3rem var(--pad) 0; }
+      .hero-intro { font-size: 0.95rem; }
+
+      /* Sections */
+      .section { padding: 2.5rem var(--pad); }
+
+      /* Material band */
+      .material-band { padding: 3rem var(--pad); }
+
+      /* Credentials */
+      .cred-cell { padding: 1.2rem 1rem; }
+
+      /* Process */
+      .process-item { gap: 0 1rem; padding: 1.2rem 0; }
+
+      /* Closing */
+      .closing { padding: 3rem var(--pad) 3.5rem; }
+      .btn { padding: 0.8rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">SONNEY</a>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#">Collections</a></li>
+      <li><a href="#">Fragrance</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="hero-tag reveal">SONNEY Paris, Our story</span>
+    <h1 class="hero-headline reveal">
+      It began with<br>
+      a garden<br>
+      <em>hose.</em>
+    </h1>
+    <div class="hero-divider reveal"></div>
+    <p class="hero-intro reveal">
+      Not a mood board. Not a trend report. Not a fashion week. A garden hose
+      in the Jura, where Lora Sonney grew up, that caught her eye and made her
+      ask: what if this became something else entirely?
+    </p>
+  </header>
+
+  <!-- ORIGIN -->
+  <section class="section">
+    <div class="two-col reveal">
+      <span class="col-label">The origin</span>
+      <div>
+        <h2 class="heading-2">Material first.<br><em>Everything follows.</em></h2>
+        <p class="body-text">
+          Lora Sonney grew up in Pontarlier, in the Jura region of France. A place of dense
+          woodlands, cold air, and gardens that live at the edge of wildness. She absorbed it
+          the way children absorb everything before they understand that they're absorbing it.
+          The tools. The textures. The particular quality of light that makes moss look like velvet.
+        </p>
+        <p class="body-text">
+          One day, a garden hose caught her attention. Not as a garden hose. As a material waiting
+          to become something it had never been before. She spent months developing a softening
+          process to transform rubber into something that moved like leather. Out of that process
+          came bags with impossible textures. Out of those bags came a technique for fusing material
+          into trompe-l'oeil prints that looked like leopard, like snakeskin, like things that don't
+          exist in nature but feel like they should. The prints that are now SONNEY's signature
+          came from a garden hose in the Jura. That is the whole story, in miniature.
+        </p>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal">
+      <p class="pq-text">"I love creating materials. It's my way of working. Then I build the collection around these experiments."</p>
+      <span class="pq-cite">Lora Sonney, Founder</span>
+    </div>
+  </section>
+
+  <!-- MATERIAL BAND -->
+  <div class="material-band">
+    <div class="band-inner">
+      <span class="band-tag reveal">The philosophy</span>
+      <h2 class="band-heading reveal">
+        Nature as material.<br>
+        <em>Material as language.</em>
+      </h2>
+      <p class="band-body reveal">
+        SONNEY does not begin with a silhouette. It begins with a question about what a material
+        can do. Every collection is built from the inside out, from the fabric, from the surface,
+        from the texture first. The garment is the conclusion of an experiment, not the starting point.
+      </p>
+      <p class="band-body reveal">
+        This is why SONNEY's prints look like nothing else. They are not licensed or sourced.
+        They are made, through a process of material research that began in a garden and continues
+        in the studio. Every trompe-l'oeil, every surface illusion, every pattern that makes you
+        look twice carries that origin inside it.
+      </p>
+    </div>
+  </div>
+
+  <!-- CREDENTIALS -->
+  <section class="section">
+    <div class="two-col reveal">
+      <span class="col-label">Formation</span>
+      <div>
+        <h2 class="heading-2">The training<br><em>behind the eye.</em></h2>
+        <p class="body-text">
+          Lora studied at the Haute Ecole d'Art et de Design in Geneva. After graduating in 2021,
+          she worked at Marine Serre and Celine before joining the Swiss embroidery house
+          Jakob Schlaepfer, the atelier that supplies precious textiles to some of the most
+          demanding fashion houses in the world. She learned what rigour looks like at scale.
+          She kept the curiosity that makes it personal.
+        </p>
+      </div>
+    </div>
+
+    <div class="cred-grid reveal">
+      <div class="cred-cell">
+        <span class="cred-marker">2021</span>
+        <p class="cred-title">HEAD Geneva</p>
+        <p class="cred-body">Master's degree in fashion design. Graduate collection: recycled garden hoses reinvented as rubber-leather garments.</p>
+      </div>
+      <div class="cred-cell">
+        <span class="cred-marker">2022</span>
+        <p class="cred-title">Hyeres Finalist</p>
+        <p class="cred-body">Finalist at the Festival International de Mode et de Photographie de Hyeres, one of fashion's most closely watched emerging talent competitions.</p>
+      </div>
+      <div class="cred-cell">
+        <span class="cred-marker">2023</span>
+        <p class="cred-title">AZ Factory Couture</p>
+        <p class="cred-body">Guest designer for AZ Factory, presented in the gardens of the Fondation Cartier during Paris Haute Couture Week. Ten silhouettes. The garden hose became a print on a couture coat.</p>
+      </div>
+      <div class="cred-cell">
+        <span class="cred-marker">2024</span>
+        <p class="cred-title">IFM x AMI Prize</p>
+        <p class="cred-body">Winner of the IFM x AMI prize. SONNEY Paris founded. The label formally begins what the experiments had been building toward for years.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT'S MADE -->
+  <section class="section">
+    <div class="two-col reveal">
+      <span class="col-label">The making</span>
+      <div>
+        <h2 class="heading-2">Made in Europe.<br><em>Made deliberately.</em></h2>
+        <p class="body-text">
+          Every SONNEY piece is produced in limited quantities across France, Portugal, and Italy,
+          with long-standing manufacturing partners chosen for precision and care.
+          Limited runs are not a marketing decision. They are the natural consequence of making things properly.
+          When a piece is gone, it is gone, because the next one deserves the same attention.
+        </p>
+      </div>
+    </div>
+
+    <div class="process reveal">
+      <div class="process-item">
+        <span class="process-num">i.</span>
+        <div>
+          <p class="process-title">Material research</p>
+          <p class="process-body">Every collection begins with material experimentation, not a brief. Lora works with the fabric until it tells her what it wants to become.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <span class="process-num">ii.</span>
+        <div>
+          <p class="process-title">Print development</p>
+          <p class="process-body">The trompe-l'oeil prints are developed in-house, from Lora's material fusion technique. No two collections use the same process twice.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <span class="process-num">iii.</span>
+        <div>
+          <p class="process-title">European manufacture</p>
+          <p class="process-body">Produced in France, Portugal, or Italy with makers who have been chosen for their rigour and their relationship with the studio, not their speed.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <span class="process-num">iv.</span>
+        <div>
+          <p class="process-title">Limited and final</p>
+          <p class="process-body">Each piece is made in a small run. When the run is finished, it is finished. There is no restock, because what comes next will be different.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing reveal" style="border-top: 1px solid var(--lin);">
+    <h2 class="closing-heading">
+      The Jura is still in everything.
+    </h2>
+    <p class="closing-body">
+      Rain on petals. Moss on stone. The smell of wet earth after a storm. Lora Sonney
+      left Pontarlier and went to Geneva, to Paris, to Marine Serre, to Celine, to Jakob Schlaepfer,
+      to AZ Factory's couture atelier at the Fondation Cartier. She brought the garden with her.
+      It is in the prints. It is in the perfume. It is in the way a SONNEY coat feels like
+      something you found in a forest that happened to fit perfectly.
+    </p>
+    <a href="#" class="btn">Discover the collection</a>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section reveal" style="background:var(--mousse);max-width:100%;padding:5rem var(--pad);">
+    <div style="max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+      <div>
+        <span style="font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--jade);display:block;margin-bottom:1.5rem;">Stay close to SONNEY</span>
+        <h2 style="font-family:var(--display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;font-style:italic;line-height:1.2;color:var(--pluie);margin-bottom:1.5rem;">New drops.<br>Before anyone else knows.</h2>
+        <p style="font-size:.9rem;line-height:1.85;color:rgba(255,255,255,.45);">SONNEY produces in limited runs. When a piece is gone, it is gone. The newsletter is how you hear about the next one first. No clutter, no noise. Just the work and when it arrives.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.75rem;">
+        <input type="email" placeholder="Your email address" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--pluie);font-family:var(--display);font-style:italic;font-size:1rem;padding:.9rem 1.2rem;outline:none;">
+        <button style="background:var(--jade);color:var(--mousse);font-family:var(--body);font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:.9rem;border:none;cursor:pointer;">Join the Studio</button>
+        <p style="font-size:.7rem;color:rgba(255,255,255,.2);letter-spacing:.04em;">Limited drops. No noise. Unsubscribe whenever you like.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDIT -->
+  <div class="credit">
+    <p>
+      Spec copy sample by <a href="https://thesilkpen.in" target="_blank">The Silk Pen</a>
+      &nbsp;·&nbsp; Luxury copywriting for fashion and beauty brands
+      &nbsp;·&nbsp; <a href="mailto:hello@thesilkpen.in">hello@thesilkpen.in</a>
+    </p>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -35px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // MOBILE NAV TOGGLE
+    const navEl = document.querySelector('nav');
+    const navToggle = document.querySelector('.nav-toggle');
+
+    navToggle.addEventListener('click', () => {
+      const isOpen = navEl.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navEl.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
